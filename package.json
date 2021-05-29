@@ -4,7 +4,7 @@
   "description": "[![Actions Status](https://github.com/MGMKLML/backend-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/MGMKLML/backend-project-lvl3/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "type": "module",
   "bin": {
@@ -19,5 +19,15 @@
   "bugs": {
     "url": "https://github.com/MGMKLML/backend-project-lvl3/issues"
   },
-  "homepage": "https://github.com/MGMKLML/backend-project-lvl3#readme"
+  "homepage": "https://github.com/MGMKLML/backend-project-lvl3#readme",
+  "dependencies": {
+    "@types/jest": "^26.0.23",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.3",
+    "jest": "^27.0.2"
+  },
+  "devDependencies": {
+    "eslint-plugin-jest": "^24.3.6"
+  }
 }
