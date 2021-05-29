@@ -1,0 +1,23 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/MGMKLML/backend-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/MGMKLML/backend-project-lvl3/actions)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "bin": {
+    "page-loader": "bin/page-loader.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MGMKLML/backend-project-lvl3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MGMKLML/backend-project-lvl3/issues"
+  },
+  "homepage": "https://github.com/MGMKLML/backend-project-lvl3#readme"
+}
