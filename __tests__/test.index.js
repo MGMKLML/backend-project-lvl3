@@ -6,8 +6,16 @@ import pageLoader from '../index.js';
 
 nock.disableNetConnect();
 
-const url = 'https://ru.hexlet.io/courses';
-const expected = '<!DOCTYPE html><html><head></head><body></body></html>';
+const getFixturePath = (name) => path.join(process.cwd(), '__tests__', '__fixtures__', name);
+
+const fixtures = {
+  base: 'https://ru.hexlet.io/',
+  html: {
+    url: 'https://ru.hexlet.io/courses',
+    path: '/courses',
+    name: 'before.html',
+  },
+};
 
 let tempDir;
 
@@ -16,11 +24,14 @@ beforeEach(async () => {
 });
 
 test('download html', async () => {
-  nock('https://ru.hexlet.io')
-    .get('/courses')
+  const expected = await fs.readFile(getFixturePath(fixtures.html.name), 'utf-8');
+
+  nock(fixtures.base)
+    .get(fixtures.html.path)
     .reply(200, expected);
 
-  await pageLoader(url, tempDir);
+  await pageLoader(fixtures.html.url, tempDir);
+
   const files = await fs.readdir(tempDir);
   const result = await fs.readFile(path.join(tempDir, files[0]), 'utf-8');
   expect(result).toBe(expected);
