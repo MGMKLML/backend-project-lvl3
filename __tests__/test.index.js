@@ -15,13 +15,13 @@ const fixtures = {
     url: 'https://ru.hexlet.io/courses',
     path: '/courses',
     before: 'before.html',
-    after: 'after.html'
+    after: 'after.html',
   },
   img: {
     path: '/assets/professions/nodejs.png',
     name: 'ru-hexlet-io-assets-professions-nodejs.png',
-    expected: 'nodejs.png'
-  }
+    expected: 'nodejs.png',
+  },
 };
 
 let tempDir;

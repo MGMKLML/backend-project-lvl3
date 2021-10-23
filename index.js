@@ -1,10 +1,10 @@
 import fs from 'fs/promises';
 import path from 'path';
 import axios from 'axios';
+import prettier from 'prettier';
 import generateName from './src/generate-name.js';
 import getImagesData from './src/get-images-data.js';
 import replaceImages from './src/replace-images.js';
-import prettier from 'prettier';
 
 export default (url, workingDir) => {
   const htmlName = generateName.html(url);
@@ -29,7 +29,7 @@ export default (url, workingDir) => {
         const axiosConfig = {
           method: 'get',
           url: href,
-          responseType: 'stream'
+          responseType: 'stream',
         };
         return axios.request(axiosConfig);
       });
@@ -40,9 +40,9 @@ export default (url, workingDir) => {
       responses.forEach((response) => {
         const image = response.data;
         const href = response.config.url;
-        const imgPath = path.resolve(assetsPath, generateName['img'](href));
+        const imgPath = path.resolve(assetsPath, generateName.img(href));
         fs.writeFile(imgPath, image);
-      })
+      });
     })
     .then(() => config.htmlPath);
 };
