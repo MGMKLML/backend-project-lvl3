@@ -4,6 +4,7 @@ import axios from 'axios';
 import generateName from './src/generate-name.js';
 import getImagesData from './src/get-images-data.js';
 import replaceImages from './src/replace-images.js';
+import prettier from 'prettier';
 
 export default (url, workingDir) => {
   const htmlName = generateName.html(url);
@@ -21,7 +22,8 @@ export default (url, workingDir) => {
       return { images, html };
     })
     .then(({ images, html }) => {
-      const writeFile = fs.writeFile(config.htmlPath, html, 'utf-8');
+      const prettyHtml = prettier.format(html, { parser: 'html', tabWidth: 4 }).trim();
+      const writeFile = fs.writeFile(config.htmlPath, prettyHtml, 'utf-8');
       const makeDir = fs.mkdir(config.assetsPath);
       const axiosImages = images.map(({ href }) => {
         const axiosConfig = {
