@@ -24,16 +24,18 @@ export default (html, { url, assetsDirName }) => {
     const { origin } = new URL(url);
     const $ = cheerio.load(html);
     const tags = ['img', 'link', 'script'];
+    const attrs = ['href', 'src'];
     const assets = tags.map((tag) => {
         const tagData = $(tag).toArray().map((dom) => {
             const oldSrc = dom.attribs.src ?? ( dom.attribs.href ?? null );
+            const attr = attrs.find((val) => !!dom.attribs[val]);
             if (!oldSrc) return {};
 
             const { href } = getAbsoluteUrl(oldSrc, origin);
             if (!isSameDomain(origin, href)) return {};
 
             const newSrc = path.join(assetsDirName, buildName.file(href));
-            return { oldSrc, newSrc, href, tag };
+            return { oldSrc, newSrc, href, tag, attr };
         });
         return tagData;
     });

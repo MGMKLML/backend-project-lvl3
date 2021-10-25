@@ -35,8 +35,12 @@ const cases = [
         source: 'https://ru.hexlet.io/courses',
         expected: 'ru-hexlet-io-courses_files',
         type: 'folder'
+    },
+    {
+        source: 'https://ru.hexlet.io/courses/',
+        expected: 'ru-hexlet-io-courses_files',
+        type: 'folder'
     }
-
 ]
 
 test.each(cases)('test $source', ({ source, expected, type }) => {
