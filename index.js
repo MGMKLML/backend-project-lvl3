@@ -6,7 +6,6 @@ import buildName from './src/build-name.js';
 import getAssetsData from './src/get-assets-data.js';
 import replaceAssetsPaths from './src/replace-assets-paths.js';
 
-
 export default (url, workingDir) => {
   const htmlName = buildName.file(url);
   const assetsDirName = buildName.folder(url);

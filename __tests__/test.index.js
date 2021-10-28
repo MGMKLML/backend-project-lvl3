@@ -25,22 +25,22 @@ const fixtures = {
   link: {
     path: [
       '/assets/application.css',
-      '/courses'
+      '/courses',
     ],
     name: [
       'ru-hexlet-io-assets-application.css',
-      'ru-hexlet-io-courses.html'
+      'ru-hexlet-io-courses.html',
     ],
     expected: [
       'application.css',
-      'ru-hexlet-io-courses.html'
-    ]
+      'ru-hexlet-io-courses.html',
+    ],
   },
   script: {
     path: '/packs/js/runtime.js',
     name: 'ru-hexlet-io-packs-js-runtime.js',
-    expected: 'runtime.js'
-  }
+    expected: 'runtime.js',
+  },
 };
 
 let tempDir;

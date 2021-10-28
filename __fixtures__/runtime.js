@@ -1,1 +1,1 @@
-const nothing = (something) => `anything and ${something}`;
+export default (something) => `anything and ${something}`;
