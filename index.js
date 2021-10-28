@@ -25,25 +25,25 @@ export default (url, workingDir) => {
     .then(({ assets, html }) => {
       const prettyHtml = prettier.format(html, { parser: 'html', tabWidth: 4 }).trim();
       const writeFile = fs.writeFile(config.htmlPath, prettyHtml, 'utf-8');
-    //   const makeDir = fs.mkdir(config.assetsPath);
-    //   const axiosImages = images.map(({ href }) => {
-    //     const axiosConfig = {
-    //       method: 'get',
-    //       url: href,
-    //       responseType: 'stream',
-    //     };
-    //     return axios.request(axiosConfig);
-    //   });
+      const makeDir = fs.mkdir(config.assetsPath);
+      const axiosAssets = assets.map(({ href }) => {
+        const axiosConfig = {
+          method: 'get',
+          url: href,
+          responseType: 'stream',
+        };
+        return axios.request(axiosConfig);
+      });
 
-    //   return Promise.all([writeFile, makeDir, ...axiosImages]);
+      return Promise.all([writeFile, makeDir, ...axiosAssets]);
     })
-    // .then(([, , ...responses]) => {
-    //   responses.forEach((response) => {
-    //     const image = response.data;
-    //     const href = response.config.url;
-    //     const imgPath = path.resolve(assetsPath, generateName.img(href));
-    //     fs.writeFile(imgPath, image);
-    //   });
-    // })
+    .then(([, , ...responses]) => {
+      responses.forEach((response) => {
+        const asset = response.data;
+        const href = response.config.url;
+        const assetLocation = path.resolve(assetsPath, buildName.file(href));
+        fs.writeFile(assetLocation, asset);
+      });
+    })
     .then(() => config.htmlPath);
 };
