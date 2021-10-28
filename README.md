@@ -7,3 +7,5 @@
 [Part 1, Downloading HTML](https://asciinema.org/a/417921)
 
 [Part 2, Downloading Images and modifying HTML](https://asciinema.org/a/444093)
+
+[part 3, Downloading Assets and modifying HTML](https://asciinema.org/a/445359)
