@@ -23,7 +23,7 @@ export default (url, workingDir) => {
       return { assets, html };
     })
     .then(({ assets, html }) => {
-      const prettyHtml = prettier.format(html, { parser: 'html', tabWidth: 4 }).trim();
+      const prettyHtml = prettier.format(html, { parser: 'html', tabWidth: 2 }).trim();
       const writeFile = fs.writeFile(config.htmlPath, prettyHtml, 'utf-8');
       const makeDir = fs.mkdir(config.assetsPath);
       const axiosAssets = assets.map(({ href }) => {
