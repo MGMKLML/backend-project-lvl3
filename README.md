@@ -9,3 +9,5 @@
 [Part 2, Downloading Images and modifying HTML](https://asciinema.org/a/444093)
 
 [part 3, Downloading Assets and modifying HTML](https://asciinema.org/a/445359)
+
+[part 4, Using debug and logs](https://asciinema.org/a/445605)
