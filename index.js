@@ -17,6 +17,8 @@ export default (url, workingDir) => {
   log('generating paths');
   const htmlName = buildName.file(url);
   const assetsDirName = buildName.folder(url);
+  log(`htmlName = ${htmlName}`);
+  log(`workingDir = ${workingDir}`);
   const htmlPath = path.resolve(path.join(workingDir, htmlName));
   const assetsPath = path.resolve(path.join(workingDir, assetsDirName));
   const config = {
@@ -57,7 +59,6 @@ export default (url, workingDir) => {
     .then(([, , ...responses]) => {
       const tasks = responses.map((response) => {
         const asset = response.data;
-        log(`asset is ${asset}`);
         const href = response.config.url;
         const assetLocation = path.resolve(assetsPath, buildName.file(href));
         return {
