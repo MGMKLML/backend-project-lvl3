@@ -4,11 +4,11 @@ import debug from 'debug';
 import 'axios-debug-log';
 import axios from 'axios';
 import prettier from 'prettier';
+import Listr from 'listr';
 import buildName from './src/build-name.js';
 import getAssetsData from './src/get-assets-data.js';
 import replaceAssetsPaths from './src/replace-assets-paths.js';
 import FriendlyError from './src/FriendlyError.js';
-import Listr from 'listr';
 
 const log = debug('page-loader');
 
@@ -50,7 +50,7 @@ export default (url, workingDir) => {
         };
         return axios.request(axiosConfig);
       });
-      
+
       return Promise.all([writeFile, makeDir, ...axiosAssets]);
     })
     .then(([, , ...responses]) => {
@@ -60,8 +60,8 @@ export default (url, workingDir) => {
         const assetLocation = path.resolve(assetsPath, buildName.file(href));
         return {
           title: `write asset ${href}`,
-          task: () => fs.writeFile(assetLocation, asset) 
-        }
+          task: () => fs.writeFile(assetLocation, asset),
+        };
       });
       return new Listr(tasks, { concurrent: true, exitOnError: false }).run();
     })
