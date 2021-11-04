@@ -8,6 +8,7 @@ import buildName from './src/build-name.js';
 import getAssetsData from './src/get-assets-data.js';
 import replaceAssetsPaths from './src/replace-assets-paths.js';
 import FriendlyError from './src/FriendlyError.js';
+import Listr from 'listr';
 
 const log = debug('page-loader');
 
@@ -40,6 +41,7 @@ export default (url, workingDir) => {
       log(`html downloaded to ${config.htmlPath}`);
       const makeDir = fs.mkdir(config.assetsPath);
       log(`asset directory created at ${config.assetsPath}`);
+
       const axiosAssets = assets.map(({ href }) => {
         const axiosConfig = {
           method: 'get',
@@ -48,17 +50,20 @@ export default (url, workingDir) => {
         };
         return axios.request(axiosConfig);
       });
-
+      
       return Promise.all([writeFile, makeDir, ...axiosAssets]);
     })
     .then(([, , ...responses]) => {
-      responses.forEach((response) => {
+      const tasks = responses.map((response) => {
         const asset = response.data;
         const href = response.config.url;
         const assetLocation = path.resolve(assetsPath, buildName.file(href));
-        fs.writeFile(assetLocation, asset);
-        log(`asset downloaded to ${assetLocation}`);
+        return {
+          title: `write asset ${href}`,
+          task: () => fs.writeFile(assetLocation, asset) 
+        }
       });
+      return new Listr(tasks, { concurrent: true, exitOnError: false }).run();
     })
     .then(() => config.htmlPath)
     .catch((error) => {
