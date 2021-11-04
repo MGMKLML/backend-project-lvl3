@@ -11,7 +11,11 @@ program
   .option('-o, --output [dir]', 'output dir', process.cwd())
   .action((url, options) => {
     pageLoader(url, options.output)
-      .then((filePath) => console.log(filePath));
+      .then((filePath) => console.log(filePath))
+      .catch((message) => {
+        console.error(message);
+        process.exit(1);
+      });
   });
 
 program.parse();

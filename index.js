@@ -7,6 +7,7 @@ import prettier from 'prettier';
 import buildName from './src/build-name.js';
 import getAssetsData from './src/get-assets-data.js';
 import replaceAssetsPaths from './src/replace-assets-paths.js';
+import FriendlyError from './src/FriendlyError.js';
 
 const log = debug('page-loader');
 
@@ -59,5 +60,8 @@ export default (url, workingDir) => {
         log(`asset downloaded to ${assetLocation}`);
       });
     })
-    .then(() => config.htmlPath);
+    .then(() => config.htmlPath)
+    .catch((error) => {
+      throw new FriendlyError(error);
+    });
 };
