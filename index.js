@@ -67,6 +67,6 @@ export default (url, workingDir = process.cwd()) => {
     })
     .then(() => config.htmlPath)
     .catch((error) => {
-        throw new FriendlyError(error);
+      throw new FriendlyError(error);
     });
 };
