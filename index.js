@@ -12,7 +12,7 @@ import FriendlyError from './src/FriendlyError.js';
 
 const log = debug('page-loader');
 
-export default (url, workingDir) => {
+export default (url, workingDir = process.cwd()) => {
   log(`requested url ${url}`);
   log('generating paths');
   const htmlName = buildName.file(url);
