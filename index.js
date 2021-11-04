@@ -47,7 +47,7 @@ export default (url, workingDir) => {
         const axiosConfig = {
           method: 'get',
           url: href,
-          responseType: 'stream',
+          responseType: 'arraybuffer',
         };
         return axios.request(axiosConfig);
       });
@@ -57,6 +57,7 @@ export default (url, workingDir) => {
     .then(([, , ...responses]) => {
       const tasks = responses.map((response) => {
         const asset = response.data;
+        log(`asset is ${asset}`);
         const href = response.config.url;
         const assetLocation = path.resolve(assetsPath, buildName.file(href));
         return {
@@ -68,6 +69,9 @@ export default (url, workingDir) => {
     })
     .then(() => config.htmlPath)
     .catch((error) => {
-      throw new FriendlyError(error);
+      if (error.isAxiosError || !!error.code) {
+        throw new FriendlyError(error);
+      }
+      throw error;
     });
 };
