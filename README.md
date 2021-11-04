@@ -13,3 +13,5 @@
 [Part 4, Using debug and logs](https://asciinema.org/a/445605)
 
 [Part 5, Errors](https://asciinema.org/a/446998)
+
+[Part 6, Listr](https://asciinema.org/a/447005)
