@@ -13,12 +13,9 @@ import FriendlyError from './src/FriendlyError.js';
 const log = debug('page-loader');
 
 export default (url, workingDir = process.cwd()) => {
-  log(`requested url ${url}`);
   log('generating paths');
   const htmlName = buildName.file(url);
   const assetsDirName = buildName.folder(url);
-  log(`htmlName = ${htmlName}`);
-  log(`workingDir = ${workingDir}`);
   const htmlPath = path.resolve(path.join(workingDir, htmlName));
   const assetsPath = path.resolve(path.join(workingDir, assetsDirName));
   const config = {
@@ -70,9 +67,6 @@ export default (url, workingDir = process.cwd()) => {
     })
     .then(() => config.htmlPath)
     .catch((error) => {
-      if (error.isAxiosError || !!error.code) {
         throw new FriendlyError(error);
-      }
-      throw error;
     });
 };
